@@ -2,22 +2,22 @@ import {useEffect, useRef} from 'react';
 import axios from 'axios';
 
 const TextToSpeech = ({ text, apiKey }) => {
-    console.log(apiKey)
-    const hasFetchedAudio = useRef(false);
+    const currentText = useRef('')
 
     useEffect(() => {
         const fetchAudio = async () => {
-            if (hasFetchedAudio.current) return;
-                hasFetchedAudio.current = true;
+            if (currentText.current === text) return;
+
+            currentText.current = text;
 
             try {
                 const response = await axios.post('https://api.elevenlabs.io/v1/text-to-speech/od8yrcXVeq6RTJZOLGH0', {
                     text: text,
                     model_id: 'eleven_multilingual_v2',
                     voice_settings: {
-                        stability: 0.75,
+                        stability: 0.6,
                         similarity_boost: 0.75,
-                        style: 0.5,
+                        style: 0.1,
                         use_speaker_boost: false
                     }
                 }, {
