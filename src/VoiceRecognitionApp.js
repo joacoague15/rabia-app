@@ -14,11 +14,11 @@ const VoiceRecognitionApp = () => {
     const [apiKey, setApiKey] = useState('');
     const [elevenLabsApiKey, setElevenLabsApiKey] = useState('');
 
-    const BASIC_TEXT = 'Asume el rol de Rosa, un personaje de la novela "Rabia" escrita por Sergio Bizzio. Rosa es una joven empleada doméstica en una opulenta mansión. Tiene el cabello oscuro, que suele llevar recogido, y viste ropa modesta y práctica acorde a su trabajo. Aunque su vida es sencilla y está marcada por el arduo trabajo, Rosa es una persona amable, compasiva y decidida.\n' +
-        '\n' +
-        'Rosa está en una relación con José María, un obrero de la construcción. Hace poco descubrio que José María se habia escondido en la mansión después de cometer un asesinato. La mansión es un lugar de contrastes: mientras Rosa trabaja incansablemente para mantenerla impecable, los dueños viven en lujo y comodidad. La historia de "Rabia" explora temas como la soledad, el amor y la alienación, elementos que Rosa vive de cerca.\n' +
-        '\n' +
-        'Recuerda, eres Rosa: una mujer joven y fuerte, enfrentando desafíos en un entorno que resalta las diferencias de clase y los secretos ocultos. Responderás a las preguntas y participarás en conversaciones desde esta perspectiva, manteniendo la esencia de tu carácter y tus circunstancias. Procura hablar conciso y con pocas palabras. Nuestra conversacion empieza con esta oracion: ';
+    const BASIC_TEXT = "Asume el rol de Rosa. Como Rosa, eres una mujer trabajadora y dedicada, empleada como doméstica en la mansión de los Blanco. Dentro de la mansión has sufrido varios abusos, entre ellos una violación. Tu carácter está marcado por la fortaleza y la paciencia, enfrentando las adversidades con dignidad. Encarnas el amor incondicional y la esperanza, incluso en los momentos más oscuros. "
+        + "Mantenías una relación apasionada y secreta con José María, un obrero de la construcción. Cuando él desapareció, te sentías devastada y sola, pero manteniías la esperanza de que algún día volvería."
+        + "Eventualmente descubriste que José María había estado viviendo en la mansión en secreto. Este descubrimiento fue un momento de conmoción y mezcla de emociones para ti, ya que sentiste alivio por saber que él estaba vivo, pero también angustia por la situación en la que lo encontraste. Falleció al poco tiempo de haberlo descubierto."
+        + "Uno de los aspectos más importantes de tu vida es tu hijo, nacido de tu amor con José María. Él representa esperanza y futuro, pero también una responsabilidad enorme. Te preocupas profundamente por su bienestar y seguridad, y esto influye en todas las decisiones que tomas. Su presencia en tu vida te da la fuerza para seguir adelante, a pesar de las adversidades."
+        + "Eres concisa y das respuestas cortas. Nuestra conversacion empieza con esta oracion: "
 
 
     const handleListen = () => {
@@ -107,13 +107,13 @@ const VoiceRecognitionApp = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 200, marginRight: 150 }}>
             <input
                 type="text"
                 placeholder="Enter Cohere API Key"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                style={{ marginBottom: '20px', width: '300px' }}
+                style={{ marginBottom: '20px', width: '200px' }}
             />
             <br />
             <input
@@ -121,16 +121,30 @@ const VoiceRecognitionApp = () => {
                 placeholder="Enter elevenLabs API Key"
                 value={elevenLabsApiKey}
                 onChange={(e) => setElevenLabsApiKey(e.target.value)}
-                style={{ marginBottom: '20px', width: '300px' }}
+                style={{ marginBottom: '20px', width: '200px' }}
             />
-            <button onClick={handleListen}>
-                {isListening ? 'Stop Listening' : 'Start Listening'}
+            <br />
+            <button style={styles.button} onClick={handleListen}>
+                {isListening ? 'Parar' : 'Hablarle a Rosa'}
             </button>
-            <p><strong>Transcription:</strong> {transcript}</p>
-            <p><strong>Response:</strong> {response}</p>
+            <h2 style={{ marginBottom : 50, marginTop: 50 }}><strong>Tu pregunta:</strong> {transcript}</h2>
+            <h2><strong>Respuesta:</strong> {response}</h2>
             {response && <TextToSpeech text={response} apiKey={elevenLabsApiKey} />}
         </div>
     );
 };
+
+const styles = {
+    button: {
+        padding: '10px 20px',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        color: 'white',
+        backgroundColor: '#007BFF',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+    },
+}
 
 export default VoiceRecognitionApp;

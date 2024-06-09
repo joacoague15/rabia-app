@@ -4,13 +4,25 @@ import rosaImg from "./assets/rosa.webp";
 function App() {
   return (
     <div className="App">
-      <VoiceRecognitionApp />
-      <img src={rosaImg} alt="rosa-img" style={styles.image} />
+        <div style={ styles.appContainer }>
+            <div style={{ marginRight: 20 }}>
+                <VoiceRecognitionApp />
+            </div>
+            <div style={{ marginTop: 40 }}>
+                <img src={rosaImg} alt="rosa-img" style={styles.image} />
+            </div>
+        </div>
     </div>
   );
 }
 
 const styles = {
+    appContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+    },
     container: {
         textAlign: 'center',
         marginTop: '50px',
@@ -26,12 +38,8 @@ const styles = {
         marginBottom: '20px',
     },
     image: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        maxWidth: '60%',
-        maxHeight: '60%',
+        width: '350px',
+        height: '550px',
     },
 };
 
